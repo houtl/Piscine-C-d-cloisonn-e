@@ -13,10 +13,8 @@
 #include "do_op.h"
 #include "ft_opp.h"
 
-void	ft_usage(int i, int j)
+void	ft_usage()
 {
-	i = 0;
-	j = 0;
 	write(1, "error : only [ + - * / % ] are accepted.\n", 41);
 }
 

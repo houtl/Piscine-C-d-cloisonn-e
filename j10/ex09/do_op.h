@@ -31,6 +31,6 @@ void			ft_sub(int i, int j);
 void			ft_mul(int i, int j);
 void			ft_div(int i, int j);
 void			ft_mod(int i, int j);
-void			ft_usage(int i, int j);
+void			ft_usage();
 
 #endif
