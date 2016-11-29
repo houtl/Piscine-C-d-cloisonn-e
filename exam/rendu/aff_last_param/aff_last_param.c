@@ -1,41 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ulstr.c                                            :+:      :+:    :+:   */
+/*   aff_last_param.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: thou <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 10:10:08 by exam              #+#    #+#             */
-/*   Updated: 2016/11/08 10:23:57 by exam             ###   ########.fr       */
+/*   Created: 2016/11/09 11:26:25 by thou              #+#    #+#             */
+/*   Updated: 2016/11/09 11:34:16 by thou             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int		main(int ac, char **av)
+int main(int ac, char **av)
 {
 	int i;
 
 	i = 0;
-	if (ac != 2)
+	if (ac < 2)
 	{
 		write(1, "\n", 1);
 		return (0);
 	}
-	while (av[1][i] != 0)
+	else
 	{
-		if (av[1][i] > 64 && av[1][i] < 91)
-			av[1][i] = av[1][i] + 32;
-		else if (av[1][i] > 96 && av[1][i] < 123)
-			av[1][i] = av[1][i] - 32;
-		ft_putchar(av[1][i]);
-		i++;
+		while (av[ac-1][i] != 0)
+			write(1, &av[ac-1][i++], 1);
+		write(1, "\n", 1);
 	}
-	ft_putchar('\n');
 	return (0);
-}		
+}

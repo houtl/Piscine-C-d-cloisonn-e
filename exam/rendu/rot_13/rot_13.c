@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rrange.c                                        :+:      :+:    :+:   */
+/*   rot_13.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 11:11:47 by exam              #+#    #+#             */
-/*   Updated: 2016/11/08 11:32:34 by exam             ###   ########.fr       */
+/*   Created: 2016/11/15 10:10:20 by exam              #+#    #+#             */
+/*   Updated: 2016/11/15 10:29:09 by exam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <unistd.h>
 
-int		*ft_rrange(int start, int end)
+int main(int ac, char **av)
 {
-	int	*tab;
-	int	i;
+	char	*c;
 
-	i = end - start;
-	if (i < 0)
-		i = 0 - i;
-	tab = (int*)malloc((int) sizeof(i + 1));
-	while (start != end)
+	if (ac != 2)
 	{
-		tab[i] = start;
-		if (start > end)
-			start--;
-		else
-			start++;
-		i--;
+		write(1, "\n", 1);
+		return (0);
 	}
-	tab[0] = start;
-	return (tab);
+	c = av[1];
+	while (*c)
+	{
+		if ((*c > 64 && *c < 78) || (*c > 96 && *c < 110))
+			*c += 13;
+		else if ((*c > 77 && *c < 91) || (*c > 109 && *c < 123))
+			*c -= 13;
+		write(1, c, 1);
+		c++;
+	}
+	write (1, "\n", 1);
+	return (0);
 }

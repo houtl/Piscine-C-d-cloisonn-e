@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rrange.c                                        :+:      :+:    :+:   */
+/*   swap_bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 11:11:47 by exam              #+#    #+#             */
-/*   Updated: 2016/11/08 11:32:34 by exam             ###   ########.fr       */
+/*   Created: 2016/11/08 10:29:50 by exam              #+#    #+#             */
+/*   Updated: 2016/11/08 11:05:36 by exam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int		*ft_rrange(int start, int end)
+unsigned char	swap_bits(unsigned char octet)
 {
-	int	*tab;
-	int	i;
+	int		i;
+	int		j;
+	int		n;
+	char	dest;
 
-	i = end - start;
-	if (i < 0)
-		i = 0 - i;
-	tab = (int*)malloc((int) sizeof(i + 1));
-	while (start != end)
+	i = 0 + octet;
+	n = 16;
+	dest = 0;
+	while (i != 0)
 	{
-		tab[i] = start;
-		if (start > end)
-			start--;
-		else
-			start++;
-		i--;
+		if (n > 128)
+			n = 1;
+		j = i % 2;
+		dest += n * j;
+		n = n * 2;
+		i = i / 2;
 	}
-	tab[0] = start;
-	return (tab);
+	return (dest);
 }

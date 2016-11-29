@@ -1,35 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rrange.c                                        :+:      :+:    :+:   */
+/*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 11:11:47 by exam              #+#    #+#             */
-/*   Updated: 2016/11/08 11:32:34 by exam             ###   ########.fr       */
+/*   Created: 2016/11/08 11:42:25 by exam              #+#    #+#             */
+/*   Updated: 2016/11/08 11:52:15 by exam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-int		*ft_rrange(int start, int end)
+typedef struct		s_list
 {
-	int	*tab;
-	int	i;
-
-	i = end - start;
-	if (i < 0)
-		i = 0 - i;
-	tab = (int*)malloc((int) sizeof(i + 1));
-	while (start != end)
-	{
-		tab[i] = start;
-		if (start > end)
-			start--;
-		else
-			start++;
-		i--;
-	}
-	tab[0] = start;
-	return (tab);
-}
+	struct s_list	*next;
+	void			*data;
+}					t_list;

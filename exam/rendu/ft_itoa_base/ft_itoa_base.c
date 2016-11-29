@@ -3,88 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: thou <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/26 13:58:46 by exam              #+#    #+#             */
-/*   Updated: 2016/08/26 15:33:24 by exam             ###   ########.fr       */
+/*   Created: 2016/11/21 14:47:41 by thou              #+#    #+#             */
+/*   Updated: 2016/11/21 16:29:44 by thou             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*rev(char *tab)
+static int	ft_nb_base(int value, int base)
 {
-	int		len;
 	int		i;
-	int		j;
-	char	tmp;
 
-	len = 0;
-	while (tab[len])
-	{
-		len++;
-	}
-	i = 0;
-	j = len - 1;
-	while (i < j)
-	{
-		tmp = tab[i];
-		tab[i] = tab[j];
-		tab[j] = tmp;
-		i++;
-		j--;
-	}
-	return (tab);
-}
-
-char	*remplace(char *tab)
-{
-	int i;
-	
-	i = 0;
-	while (tab[i])
-	{
-		if (tab[i] == ':')
-			tab[i] = 'A';
-		if (tab[i] == ';')
-			tab[i] = 'B';
-		if (tab[i] == '<')
-			tab[i] = 'C';
-		if (tab[i] == '=')
-			tab[i] = 'D';
-		if (tab[i] == '>')
-			tab[i] = 'E';
-		if (tab[i] == '?')
-			tab[i] = 'F';
-		i++;
-	}
-	return (tab);
-}
-
-char	*ft_itoa_base(int value, int base)
-{
-	char	*tab;
-	int		i;
-	long	nb;
-
-	tab = (char*)malloc(sizeof(char) * 33);
-	i = 0;
-	nb = value;
-	if (nb == 0)
-	{
-		tab[0] = 0;
-		i = 1;
-	}
-	if (nb < 0)
-		nb = -nb;
-	while (nb != 0)
-	{
-		tab[i] = (nb % base) + '0';
-		nb = nb / base;
-		i++;
-	}
+	i = 1;
 	if (base == 10 && value < 0)
-		tab[i++] = '-';
-	tab[i] = 0;
-	return (remplace(rev(tab)));
+		i++;
+	while (value / base != 0)
+	{
+		i++;
+		value = value / base;
+	}
+	return (i);
+}
+
+char		*ft_itoa_base(int value, int base)
+{
+	int		i;
+	long	n;
+	char	*c;
+	char	*b;
+
+	b = "0123456789ABCDEF";
+	c = (char*)malloc(sizeof(char) * (ft_nb_base(value, base) + 1));
+	if (!c)
+		return (NULL);
+	i = ft_nb_base(value, base);
+	c[i--] = 0;
+	n = value;
+	if (value < 0)
+	{
+		n = -n;
+		if (base == 10)
+			c[0] = '-';
+	}
+	while (n / base != 0)
+	{
+		c[i--] = *(b + (n % base));
+		n = n / base;
+	}
+	c[i] = *(b + (n % base));
+	return (c);
 }

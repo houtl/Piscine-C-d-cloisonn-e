@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rrange.c                                        :+:      :+:    :+:   */
+/*   ft_list_foreach.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 11:11:47 by exam              #+#    #+#             */
-/*   Updated: 2016/11/08 11:32:34 by exam             ###   ########.fr       */
+/*   Created: 2016/11/08 11:43:52 by exam              #+#    #+#             */
+/*   Updated: 2016/11/08 11:51:56 by exam             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "ft_list.h"
 
-int		*ft_rrange(int start, int end)
+void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
 {
-	int	*tab;
-	int	i;
+	t_list	*list;
 
-	i = end - start;
-	if (i < 0)
-		i = 0 - i;
-	tab = (int*)malloc((int) sizeof(i + 1));
-	while (start != end)
+	list = begin_list;
+	while (list != 0)
 	{
-		tab[i] = start;
-		if (start > end)
-			start--;
-		else
-			start++;
-		i--;
+		(*f)(list->data);
+		list = list->next;
 	}
-	tab[0] = start;
-	return (tab);
 }

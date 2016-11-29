@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rrange.c                                        :+:      :+:    :+:   */
+/*   pgcd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exam <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: thou <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 11:11:47 by exam              #+#    #+#             */
-/*   Updated: 2016/11/08 11:32:34 by exam             ###   ########.fr       */
+/*   Created: 2016/11/09 13:40:15 by thou              #+#    #+#             */
+/*   Updated: 2016/11/09 13:50:47 by thou             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 
-int		*ft_rrange(int start, int end)
+int main(int ac, char **av)
 {
-	int	*tab;
-	int	i;
+	int a;
+	int b;
+	int c;
 
-	i = end - start;
-	if (i < 0)
-		i = 0 - i;
-	tab = (int*)malloc((int) sizeof(i + 1));
-	while (start != end)
+	if (ac != 3)
 	{
-		tab[i] = start;
-		if (start > end)
-			start--;
-		else
-			start++;
-		i--;
+		printf("\n");
+		return (0);
 	}
-	tab[0] = start;
-	return (tab);
+	a = atoi(av[1]);
+	b = atoi(av[2]);
+	c = a % b;
+	while (c)
+	{
+		a = b;
+		b = c;
+		c = a % b;
+	}
+		printf("%d\n", b);
 }
